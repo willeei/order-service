@@ -1,0 +1,19 @@
+amqp:
+  host: localhost
+  port: 5672
+  username: adm_videos
+  password: 123456
+logging:
+  level:
+    ROOT: info
+
+mysql:
+  username: root
+  password: 123456
+  schema: order_service
+  url: localhost:${mysql.port}
+
+spring:
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.amqp.RabbitAutoConfiguration

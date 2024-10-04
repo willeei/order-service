@@ -1,0 +1,32 @@
+version: "3.7"
+
+services:
+  mysql:
+    container_name: order_service_mysql
+    image: mysql:8.0
+    environment:
+      - MYSQL_ROOT_PASSWORD=9655
+      - MYSQL_DATABASE=order_service
+    security_opt:
+      - seccomp:unconfined
+    ports:
+      - "3306:3306"
+    networks:
+      - order_service_network
+
+  rabbitmq:
+    container_name: order_service_rabbitmq
+    image: rabbitmq:3-management
+    environment:
+      - RABBITMQ_ERLANG_COOKIE=SWQOKODSQALRPCLNMEQG
+      - RABBITMQ_DEFAULT_USER=order_service
+      - RABBITMQ_DEFAULT_PASS=123456
+      - RABBITMQ_DEFAULT_VHOST=/
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - order_service_network
+
+networks:
+  order_service_network:
